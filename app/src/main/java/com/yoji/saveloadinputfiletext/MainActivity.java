@@ -50,12 +50,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener registerBtnOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-        }
-    };
+    private View.OnClickListener registerBtnOnClickListener = v -> startActivity(new Intent(MainActivity.this, RegisterActivity.class));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,17 +90,14 @@ public class MainActivity extends AppCompatActivity {
                                 + login, Toast.LENGTH_LONG).show();
                         passwordEdtTxt.setText("");
                         loginEdtTxt.setText("");
-                        loginBr.close();
-                        passwordBr.close();
-                        return;
                     }else {
                         Toast.makeText(this, getString(R.string.toast_message_wrong_password),
                                 Toast.LENGTH_SHORT).show();
                         passwordEdtTxt.setText("");
-                        loginBr.close();
-                        passwordBr.close();
-                        return;
                     }
+                    loginBr.close();
+                    passwordBr.close();
+                    return;
                 }
             }
             passwordEdtTxt.setText("");

@@ -55,12 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener cancelBtnOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-        }
-    };
+    private View.OnClickListener cancelBtnOnClickListener = v -> startActivity(new Intent(RegisterActivity.this, MainActivity.class));
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
