@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,6 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void saveUser(String login, String password){
         saveToFile(login, TxtFileName.LOGIN);
         saveToFile(password, TxtFileName.PASSWORD);
+        Toast.makeText(this, R.string.toast_message_user_registered, Toast.LENGTH_SHORT).show();
     }
 
     private void saveToFile (String string, String fileName){
