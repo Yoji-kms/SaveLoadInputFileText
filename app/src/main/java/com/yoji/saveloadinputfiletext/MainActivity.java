@@ -106,8 +106,11 @@ public class MainActivity extends AppCompatActivity {
             passwordBr.close();
             Toast.makeText(this, getString(R.string.toast_message_user_not_found),
                     Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            passwordEdtTxt.setText("");
+            loginEdtTxt.setText("");
+            Toast.makeText(this, R.string.toast_message_user_not_found, Toast.LENGTH_SHORT).show();
         }
     }
 }
