@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         initViews();
     }
 
-    private void initViews(){
+    private void initViews() {
         loginEdtTxt = findViewById(R.id.loginEdtTxtId);
         passwordEdtTxt = findViewById(R.id.passwordEdtTxtId);
         loginBtn = findViewById(R.id.loginBtnId);
@@ -71,45 +71,42 @@ public class MainActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(registerBtnOnClickListener);
     }
 
-    private void enteredLoginAndPasswordExist (String login, String password){
-        try {
-            FileInputStream loginFis = openFileInput(TxtFileName.LOGIN);
-            FileInputStream passwordFis = openFileInput(TxtFileName.PASSWORD);
+    private void enteredLoginAndPasswordExist(String login, String password) {
+        try (FileInputStream loginFis = openFileInput(TxtFileName.LOGIN);
+             FileInputStream passwordFis = openFileInput(TxtFileName.PASSWORD);
             InputStreamReader loginIsr = new InputStreamReader(loginFis);
             InputStreamReader passwordIsr = new InputStreamReader(passwordFis);
             BufferedReader loginBr = new BufferedReader(loginIsr);
-            BufferedReader passwordBr = new BufferedReader(passwordIsr);
+            BufferedReader passwordBr = new BufferedReader(passwordIsr)){
             String savedLogin;
             String savedPassword;
             while ((savedLogin = loginBr.readLine()) != null &&
-                    (savedPassword = passwordBr.readLine()) != null){
-                if (login.equals(savedLogin)){
-                    if (password.equals(savedPassword)){
+                    (savedPassword = passwordBr.readLine()) != null) {
+                if (login.equals(savedLogin)) {
+                    if (password.equals(savedPassword)) {
                         Toast.makeText(this, getString(R.string.toast_message_logged_in)
                                 + login, Toast.LENGTH_LONG).show();
-                        passwordEdtTxt.setText("");
-                        loginEdtTxt.setText("");
-                    }else {
+                        clearEdtTxtForms();
+                    } else {
                         Toast.makeText(this, getString(R.string.toast_message_wrong_password),
                                 Toast.LENGTH_SHORT).show();
                         passwordEdtTxt.setText("");
                     }
-                    loginBr.close();
-                    passwordBr.close();
                     return;
                 }
             }
-            passwordEdtTxt.setText("");
-            loginEdtTxt.setText("");
-            loginBr.close();
-            passwordBr.close();
+            clearEdtTxtForms();
             Toast.makeText(this, getString(R.string.toast_message_user_not_found),
                     Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
-            passwordEdtTxt.setText("");
-            loginEdtTxt.setText("");
+            clearEdtTxtForms();
             Toast.makeText(this, R.string.toast_message_user_not_found, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void clearEdtTxtForms() {
+        passwordEdtTxt.setText("");
+        loginEdtTxt.setText("");
     }
 }

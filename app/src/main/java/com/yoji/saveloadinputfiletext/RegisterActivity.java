@@ -88,12 +88,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void saveToFile (String string, String fileName){
-        try {
-            FileOutputStream fileOutputStream = openFileOutput(fileName, MODE_APPEND);
+        try (FileOutputStream fileOutputStream = openFileOutput(fileName, MODE_APPEND);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
-            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
+            BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter)){
             bufferedWriter.append(string).append("\n");
-            bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
