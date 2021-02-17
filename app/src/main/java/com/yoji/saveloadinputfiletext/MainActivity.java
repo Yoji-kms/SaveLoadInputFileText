@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button loginBtn;
 
 
-    private TextWatcher textWatcher = new TextWatcher() {
+    private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener loginBtnOnClickListener = new View.OnClickListener() {
+    private final View.OnClickListener loginBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             String login = loginEdtTxt.getText().toString().trim();
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener registerBtnOnClickListener = v -> startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+    private final View.OnClickListener registerBtnOnClickListener = v -> startActivity(new Intent(MainActivity.this, RegisterActivity.class));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
